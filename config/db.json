@@ -1,0 +1,24 @@
+{
+  "local": {
+    "username": "root",
+    "password": null,
+    "database": "poker_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "logging":false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "poker_db_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "poker_db_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
