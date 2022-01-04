@@ -1,4 +1,5 @@
 const express = require('express')
+var cron = require('node-cron');
 const bodyParser = require('body-parser')
 const dotenv=require('dotenv')
 const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
@@ -12,6 +13,7 @@ const sessionStore = new SequelizeStore({ db: db.sequelize })
 sessionStore.sync()
 const app = express()
 const path=require("path")
+const cronJobs=require("./cron")
 
 app.use(expressSession({
   secret           : "keyboard cat",
@@ -69,7 +71,9 @@ db.sequelize.authenticate().then(async()=>{
 
 const routes = require('./routes')
 app.use("/api",routes)
-app.use(express.static(path.join(__dirname,"../poker-frontend/build")));
-app.get("*", (req, res) => {res.sendFile(path.join(__dirname,"../poker-frontend/build/index.html"))});
+app.use(express.static(path.join(__dirname,process.env.BUILD_PATH)));
+app.get("*", (req, res) => {res.sendFile(path.join(__dirname,process.env.BUILD_PATH+"/index.html"))});
+
+cron.schedule('0 */12 * * *', cronJobs.cleanup);
 
 module.exports=app

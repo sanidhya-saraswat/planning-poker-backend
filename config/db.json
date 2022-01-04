@@ -15,10 +15,17 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "poker_db_prod",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "mptaqtpljqcamn",
+    "password": "0059ca1755aac05147890a2a279266d5eb4485170ebd7edbef6180ffcb6d25b7",
+    "database": "d1o7epemt52mhf",
+    "host": "ec2-3-221-42-108.compute-1.amazonaws.com",
+    "port":5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

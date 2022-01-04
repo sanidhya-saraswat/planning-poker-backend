@@ -1,27 +1,25 @@
-# Project Management
+# Planning Poker
 
-This is a Sample Node.js API project. It contains most of the things which you may need for any basic Node.js Application like MongoDB,Swagger, etc.
+Planning Poker is an agile estimating and planning technique that is consensus based.
+Live Demo: https://agile-poker-beta.herokuapp.com/
 
-Project Management is a Node.js application which allows you to manage projects for your company and assign/manage users to projects. We have exposed multiple APIs like get all projects,create project, update project, create a user etc to allow you to access the different functionalities provided by this application.
+### How to use
+1. Visit the base url
+2. A new shareable link will be generated for you. Remember to open the link once, to become admin. Then share the link with your teammates.
+3. Done!
 
 ### Tech Stack
-- Server : Node.js
-- Database : MongoDB
-- API Doc: Swagger
-- Coding Guidelines Enforcer : ESLint
-- Testing Framework : Mocha + Chai
-- Testing Implemented : Integration Testing 
+- Node.js
+- MySQL/PostgreSQL (choosable)
 
-### How to run the application on your local machine
->Prerequisites: Node.js, Mongodb
-1. Download the source code to your machine. 
-2. Enter the root folder using terminal
-3. Run : ```npm install```
-4. Run : ```npm start```
-
-### Testing
-The testing is done using Mocha and Chai framework of Node.js. All the exposed APIs have test cases written in the ```/tests``` folder.
-To run test cases, run the following command in the root folder : ```npm run test```
+### Local Setup
+1. Take  git pull of this repo.
+2. Run ```npm install```
+3. Update the ```config/db.json```  according to your db configuration
+4. Create the necessary db in MySQL/PG
+4. Run ```npm run local``` to locally deploy the app. When you run the app for the first time, all the necessary tables will be created for you.
+5. By default, the app is available on ```http://localhost:8090```
+6. If you want to try/modify something on the frontend side, please visit this repo : Planning Poker (Frontend)
 
 ### API Documentation
-Once you run the application, access the API documentation using the following link : http://localhost:3000/docs
+Once you run the application, access the API documentation using the following link : http://localhost:8090/docs

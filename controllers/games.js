@@ -8,13 +8,19 @@ module.exports.handleSocketEvents = async (socketIO) => {
   io = socketIO
   io.on('connection', (socket) => {
     socket.on('join_room', async ({ link, name }) => {
+      try{
       console.log(`${name}(${socket.id}) joined ${link}`)
       socket.join(link);
       await Player.update({ socket_id: socket.id, active: true }, { where: { link, name } })
       eventEmitter.emit('game_update_event', link)
+      }
+      catch(err){
+        console.log("SOCKET:join_room:ERROR:",err.message)
+      }
     });
 
     socket.on('disconnect', async () => {
+      try{
       console.log(`${socket.id} got disconnected`)
       let player = await Player.findOne({ where: { socket_id: socket.id } })
       if (player) {
@@ -22,13 +28,21 @@ module.exports.handleSocketEvents = async (socketIO) => {
         await player.save()
         eventEmitter.emit('game_update_event', player.link)
       }
+    }catch(err){
+      console.log("SOCKET:disconnect:ERROR:",err.message)
+    }
     });
   })
 }
 
 eventEmitter.on("game_update_event", async (link) => {
-  let game = await Game.findOne({ where: { link }, attributes: ['show'], include: [{ model: Player, where: { active: true }, attributes: ['name', 'admin','score'] }] })
+  try{
+  let game = await Game.findOne({ where: { link }, attributes: ['show'], include: [{ model: Player, where: { active: true }, attributes: ['name', 'admin','score'],order: [['name', 'ASC']] }] })
   io.to(link).emit('game_update', game);
+  }
+  catch(err){
+    console.log("EVENT:game_update_event:ERROR:",err.message)
+  }
 })
 
 /**

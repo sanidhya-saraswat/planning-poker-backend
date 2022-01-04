@@ -8,9 +8,7 @@ const env = process.env.NODE_ENV || 'local';
 const config = require(__dirname + '/../config/db.json')[env];
 const db = {};
 
-let sequelize
-if(process.env.DATABASE_URL) sequelize=new Sequelize(process.env.DATABASE_URL);
-else sequelize=new Sequelize(config.database, config.username, config.password, config);
+let sequelize=new Sequelize(config.database, config.username, config.password, config);
 fs
   .readdirSync(__dirname)
   .filter(file => {
