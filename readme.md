@@ -1,7 +1,8 @@
 # Planning Poker
 
 Planning Poker is an agile estimating and planning technique that is consensus based.
-Live Demo: https://agile-poker-beta.herokuapp.com/
+
+Live Demo: https://agile-poker-beta.herokuapp.com
 
 ### How to use
 1. Visit the base url
