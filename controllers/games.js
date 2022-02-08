@@ -37,7 +37,7 @@ module.exports.handleSocketEvents = async (socketIO) => {
 
 eventEmitter.on("game_update_event", async (link) => {
   try{
-  let game = await Game.findOne({ where: { link }, attributes: ['show'], include: [{ model: Player, where: { active: true }, attributes: ['name', 'admin','score'],order: [['name', 'ASC']] }] })
+  let game = await Game.findOne({ where: { link }, attributes: ['show'], order: [[Player, 'name', 'ASC']], include: [{ model: Player, where: { active: true }, attributes: ['name', 'admin','score']}] })
   io.to(link).emit('game_update', game);
   }
   catch(err){
